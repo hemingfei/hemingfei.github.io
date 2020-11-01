@@ -22,28 +22,35 @@
     var CONFIG = {"hostname":"hemingfei.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="想法的由来新家装修好，买了一些智能电器，但是发现控制的APP有六款。 美的美居（洗衣机烘干机油烟机），格力+（空调），TP-LINK安防（摄像头），叮咚（门铃），阿里智能（浴霸），小Biu智家（燃气热水器）。比如上个厕所坐下来忘记开通风了，还要手机APP点好久，实在是无语，感觉一点都不智能。 于是乎，新想法诞生，把家里变成那种各种传感器和家居协同配合的真正的自动化智能家居。">
+  <meta name="description" content="树莓派安装坎坷树莓派很快周一就到了，买的壳子周二到的，安装了好一会结果风扇坏的，叫老板重新发了。 到网上翻了下教程，看到网易云课堂里的 HAChina 的课程，把免费的前几章过了一下，决定开始动手。 作为一个弄程序的，肯定选择树莓派系统然后自己手动安装 Home Assistant。可是按着那第一章教程弄了好久修了好多问题，走到最后输入 hass 安装的时候，总是需要的类库没有，也没自动安装，搞来">
 <meta property="og:type" content="article">
-<meta property="og:title" content="准备开始弄智能家居">
-<meta property="og:url" content="https://hemingfei.cn/2020/10/25/%E5%87%86%E5%A4%87%E5%BC%80%E5%A7%8B%E5%BC%84%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/index.html">
+<meta property="og:title" content="安装HomeAssistant">
+<meta property="og:url" content="https://hemingfei.cn/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/index.html">
 <meta property="og:site_name" content="HMF Space">
-<meta property="og:description" content="想法的由来新家装修好，买了一些智能电器，但是发现控制的APP有六款。 美的美居（洗衣机烘干机油烟机），格力+（空调），TP-LINK安防（摄像头），叮咚（门铃），阿里智能（浴霸），小Biu智家（燃气热水器）。比如上个厕所坐下来忘记开通风了，还要手机APP点好久，实在是无语，感觉一点都不智能。 于是乎，新想法诞生，把家里变成那种各种传感器和家居协同配合的真正的自动化智能家居。">
+<meta property="og:description" content="树莓派安装坎坷树莓派很快周一就到了，买的壳子周二到的，安装了好一会结果风扇坏的，叫老板重新发了。 到网上翻了下教程，看到网易云课堂里的 HAChina 的课程，把免费的前几章过了一下，决定开始动手。 作为一个弄程序的，肯定选择树莓派系统然后自己手动安装 Home Assistant。可是按着那第一章教程弄了好久修了好多问题，走到最后输入 hass 安装的时候，总是需要的类库没有，也没自动安装，搞来">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://hemingfei.cn/2020/10/25/%E5%87%86%E5%A4%87%E5%BC%80%E5%A7%8B%E5%BC%84%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/b1p1.jpg">
-<meta property="og:image" content="https://hemingfei.cn/2020/10/25/%E5%87%86%E5%A4%87%E5%BC%80%E5%A7%8B%E5%BC%84%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/b1p2.jpg">
-<meta property="og:image" content="https://hemingfei.cn/2020/10/25/%E5%87%86%E5%A4%87%E5%BC%80%E5%A7%8B%E5%BC%84%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/b1p3.jpg">
-<meta property="og:image" content="https://hemingfei.cn/2020/10/25/%E5%87%86%E5%A4%87%E5%BC%80%E5%A7%8B%E5%BC%84%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/b1p4.jpg">
-<meta property="article:published_time" content="2020-10-25T08:13:10.000Z">
-<meta property="article:modified_time" content="2020-10-25T12:47:11.207Z">
+<meta property="og:image" content="https://hemingfei.cn/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/b2p1.jpg">
+<meta property="og:image" content="https://hemingfei.cn/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/b2p21.jpg">
+<meta property="og:image" content="https://hemingfei.cn/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/b2p20.jpg">
+<meta property="og:image" content="https://hemingfei.cn/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/b2p22.jpg">
+<meta property="og:image" content="https://hemingfei.cn/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/b2p23.jpg">
+<meta property="og:image" content="https://hemingfei.cn/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/b2p25.jpg">
+<meta property="og:image" content="https://hemingfei.cn/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/b2p26.jpg">
+<meta property="og:image" content="https://hemingfei.cn/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/b2p27.jpg">
+<meta property="article:published_time" content="2020-11-01T17:16:03.000Z">
+<meta property="article:modified_time" content="2020-11-01T17:18:29.898Z">
 <meta property="article:author" content="HE MINGFEI">
 <meta property="article:tag" content="智能电器">
 <meta property="article:tag" content="HomeAssistant">
 <meta property="article:tag" content="树莓派">
-<meta property="article:tag" content="购物">
+<meta property="article:tag" content="HassOS">
+<meta property="article:tag" content="DuckDNS">
+<meta property="article:tag" content="公网访问">
+<meta property="article:tag" content="https">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://hemingfei.cn/2020/10/25/%E5%87%86%E5%A4%87%E5%BC%80%E5%A7%8B%E5%BC%84%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/b1p1.jpg">
+<meta name="twitter:image" content="https://hemingfei.cn/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/b2p1.jpg">
 
-<link rel="canonical" href="https://hemingfei.cn/2020/10/25/%E5%87%86%E5%A4%87%E5%BC%80%E5%A7%8B%E5%BC%84%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/">
+<link rel="canonical" href="https://hemingfei.cn/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/">
 
 
 <script id="page-configurations">
@@ -69,7 +76,7 @@
   padding: 1px 4px;
 }
 </style>
-  <title>准备开始弄智能家居 | HMF Space</title>
+  <title>安装HomeAssistant | HMF Space</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-711GL2Q31S"></script>
     <script>
@@ -211,7 +218,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hemingfei.cn/2020/10/25/%E5%87%86%E5%A4%87%E5%BC%80%E5%A7%8B%E5%BC%84%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/">
+    <link itemprop="mainEntityOfPage" href="https://hemingfei.cn/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/images/system/avatar.jpg">
@@ -224,7 +231,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          准备开始弄智能家居
+          安装HomeAssistant
         </h1>
 
         <div class="post-meta">
@@ -235,7 +242,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-10-25 16:13:10 / 修改时间：20:47:11" itemprop="dateCreated datePublished" datetime="2020-10-25T16:13:10+08:00">2020-10-25</time>
+              <time title="创建时间：2020-11-02 01:16:03 / 修改时间：01:18:29" itemprop="dateCreated datePublished" datetime="2020-11-02T01:16:03+08:00">2020-11-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -252,7 +259,7 @@
             </span>
 
           
-            <span id="/2020/10/25/%E5%87%86%E5%A4%87%E5%BC%80%E5%A7%8B%E5%BC%84%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/" class="post-meta-item leancloud_visitors" data-flag-title="准备开始弄智能家居" title="阅读次数">
+            <span id="/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/" class="post-meta-item leancloud_visitors" data-flag-title="安装HomeAssistant" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -274,8 +281,8 @@
       </span>
       <span class="post-meta-item-text">评论数：</span>
     
-    <a title="valine" href="/2020/10/25/%E5%87%86%E5%A4%87%E5%BC%80%E5%A7%8B%E5%BC%84%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/25/%E5%87%86%E5%A4%87%E5%BC%80%E5%A7%8B%E5%BC%84%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -290,28 +297,72 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="想法的由来"><a href="#想法的由来" class="headerlink" title="想法的由来"></a>想法的由来</h1><p>新家装修好，买了一些智能电器，但是发现控制的APP有六款。 美的美居（洗衣机烘干机油烟机），格力+（空调），TP-LINK安防（摄像头），叮咚（门铃），阿里智能（浴霸），小Biu智家（燃气热水器）。比如上个厕所坐下来忘记开通风了，还要手机APP点好久，实在是无语，感觉一点都不智能。</p>
-<p>于是乎，新想法诞生，把家里变成那种各种传感器和家居协同配合的真正的自动化智能家居。</p>
+        <h1 id="树莓派安装"><a href="#树莓派安装" class="headerlink" title="树莓派安装"></a>树莓派安装</h1><h2 id="坎坷"><a href="#坎坷" class="headerlink" title="坎坷"></a>坎坷</h2><p>树莓派很快周一就到了，买的壳子周二到的，安装了好一会结果风扇坏的，叫老板重新发了。</p>
+<p>到网上翻了下教程，看到网易云课堂里的 HAChina 的课程，把免费的前几章过了一下，决定开始动手。</p>
+<p>作为一个弄程序的，肯定选择树莓派系统然后自己手动安装 Home Assistant。可是按着那第一章教程弄了好久修了好多问题，走到最后输入 hass 安装的时候，总是需要的类库没有，也没自动安装，搞来搞去，最终还是功亏一篑。所以，直接 HassOS 走起，反正这个 Pi 只用来跑 Home Assistant 不跑别的内容。</p>
 <a id="more"></a>
 
-<img src="/2020/10/25/%E5%87%86%E5%A4%87%E5%BC%80%E5%A7%8B%E5%BC%84%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/b1p1.jpg" alt="目前的APP" style="zoom:33%;">
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>用了HAChina的HassOS，也就是网易课程里的第一章最后一课，前面几章免费所以看完，收费的肯定是不会去付费的，有了标题还有课件当然自己去慢慢研究，课件的github地址为 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3podWppc2hlbmcvSG9tZS1Bc3Npc3RhbnQtRElZ" title="https://github.com/zhujisheng/Home-Assistant-DIY">https://github.com/zhujisheng/Home-Assistant-DIY<i class="fa fa-external-link"></i></span></p>
+<img src="/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/b2p1.jpg" style="zoom: 33%;">
 
 
 
-<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>说干就干，于是乎搜了下这方面内容。一步到位简单的，但是需要大量金币，实在是浪费。相当复杂的，需要硬件软件等内容，好处是便宜且有趣。</p>
-<p>于是乎，本着自娱自乐的目的，准备自己慢慢弄，准备每周最多花一天研究，慢慢来，反正不急，弄点这些有趣的也应该是蛮快乐的。</p>
-<h1 id="迈出第一步"><a href="#迈出第一步" class="headerlink" title="迈出第一步"></a>迈出第一步</h1><p>搜了下网上高端局普遍是 HomeAssistant 的方案。于是乎，立马购买装备。</p>
-<p>先购买下面的东西， 后续了解了需要了再慢慢买。</p>
-<p>1 树莓派4B 2GB带电源 250元  </p>
-<p>2 sd卡 64G 32.56元  </p>
-<p>3 外壳 24.1元</p>
-<center class="half">
-<img src="/2020/10/25/%E5%87%86%E5%A4%87%E5%BC%80%E5%A7%8B%E5%BC%84%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/b1p2.jpg" alt="树莓派" style="zoom: 33%;"><img src="/2020/10/25/%E5%87%86%E5%A4%87%E5%BC%80%E5%A7%8B%E5%BC%84%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/b1p3.jpg" alt="sd卡" style="zoom: 33%;"><img src="/2020/10/25/%E5%87%86%E5%A4%87%E5%BC%80%E5%A7%8B%E5%BC%84%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/b1p4.jpg" alt="外壳" style="zoom: 33%;">
-</center>
+<h2 id="移除广告"><a href="#移除广告" class="headerlink" title="移除广告"></a>移除广告</h2><p>进入 HomeAssistant之后，左侧栏目会有HAChina的视频教程的选项链接</p>
+<p>用samba打开文件 configuration.yaml 将下列内容注释然后重启就没广告栏了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#panel_iframe:</span><br><span class="line">#  lesson:</span><br><span class="line">#    title: &quot;HA视频课程&quot;</span><br><span class="line">#    url: &quot;https:&#x2F;&#x2F;study.163.com&#x2F;course&#x2F;courseMain.htm?courseId&#x3D;1006189053&amp;share&#x3D;2&amp;shareId&#x3D;400000000624093&quot;</span><br><span class="line">#    icon: &quot;mdi:video-vintage&quot;</span><br></pre></td></tr></table></figure>
 
 
 
-<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>当然，为了更加有意思，把博客也弄了下准备记录下来，几年没弄了，以前的数据也丢了，希望这次存到github可以永久保留。目前准备1-2周一更，毕竟对这块还是纯小白，特别像是开发板就大学时弄verilog接触了几个月后面再没弄过了。</p>
+<h1 id="外网访问"><a href="#外网访问" class="headerlink" title="外网访问"></a>外网访问</h1><h2 id="IP-与-MAC绑定"><a href="#IP-与-MAC绑定" class="headerlink" title="IP 与 MAC绑定"></a>IP 与 MAC绑定</h2><p>首先，把树莓派的内网 ip 固定，进入路由器后台完成</p>
+<img src="/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/b2p21.jpg" style="zoom: 33%;">
+
+
+
+<h2 id="开启DDNS"><a href="#开启DDNS" class="headerlink" title="开启DDNS"></a>开启DDNS</h2><p>用 tp 路由器自带的开启DDNS</p>
+<img src="/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/b2p20.jpg" style="zoom: 33%;">
+
+
+
+<h2 id="映射端口"><a href="#映射端口" class="headerlink" title="映射端口"></a>映射端口</h2><p>电信光猫映射到 TP路由器，TP路由器映射到树莓派</p>
+<p><img src="/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/b2p22.jpg" style="zoom: 33%;"><img src="/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/b2p23.jpg" style="zoom: 25%;"></p>
+<h2 id="隐性域名跳转"><a href="#隐性域名跳转" class="headerlink" title="隐性域名跳转"></a>隐性域名跳转</h2><p>到目前，可以通过tpddns从外网访问了，但是输入一串域名还要冒号端口，找了半天发现 namecheap 可以免费隐藏跳转，于是把自己域名dns转到了 namecheap，做了隐性转发，这样直接访问 home.hemingfei.com 就从外网访问了。</p>
+<img src="/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/b2p25.jpg" style="zoom: 33%;">
+
+
+
+<h1 id="通过-https-加密连接"><a href="#通过-https-加密连接" class="headerlink" title="通过 https 加密连接"></a>通过 https 加密连接</h1><p>目前通过外网能访问了，但是是 http， 于是找了下如何 https 访问，找到通过 homeassistant 的插件 Duck DNS。</p>
+<h2 id="Duck-DNS-配置"><a href="#Duck-DNS-配置" class="headerlink" title="Duck DNS 配置"></a>Duck DNS 配置</h2><p>在插件首页前几个就能看到 duckDNS，安装完勾上开机启动，然后进入配置界面，到duckdns官网注册账号填入 token 和 domain</p>
+<img src="/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/b2p26.jpg" style="zoom: 33%;">
+
+
+
+<h2 id="Configuration-yaml-配置"><a href="#Configuration-yaml-配置" class="headerlink" title="Configuration.yaml 配置"></a>Configuration.yaml 配置</h2><p>通过zamba从电脑上打开configuration.yaml文件编辑，在网上看了一堆发现都不行，然后看了 log 文件排查，google。</p>
+<p>遇到几个问题</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">base_url: https://hemignfei.duckdns.org:8123</span><br></pre></td></tr></table></figure>
+
+<p>报错是： The ‘base_url’ option is deprecated, please remove it from your configuration</p>
+<p>google后发现是API改了 变成了 external_url 和 internal_url</p>
+<p>最终是这样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">homeassistant:</span><br><span class="line">  external_url: https:&#x2F;&#x2F;hemignfei.duckdns.org</span><br><span class="line">  internal_url: http:&#x2F;&#x2F;192.168.0.106:8123</span><br><span class="line"></span><br><span class="line">http:</span><br><span class="line">  ssl_certificate: &#x2F;ssl&#x2F;fullchain.pem</span><br><span class="line">  ssl_key: &#x2F;ssl&#x2F;privkey.pem</span><br><span class="line">  ip_ban_enabled: true</span><br><span class="line">  login_attempts_threshold: 5</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以通过duckdns的域名访问了并且是 https</p>
+<p>此时从外网访问OK，可是内网无法访问，内网需要手动把http加上s才可以，chrome里手动输入 <span class="exturl" data-url="aHR0cHM6Ly8xOTIuMTY4LjAuMTA2OjgxMjMv" title="https://192.168.0.106:8123/">https://192.168.0.106:8123<i class="fa fa-external-link"></i></span> 之后进入会提示不安全，因为证书是duckdns的所以从内网域名访问域名不一致，但是没关系内网不安全不重要，外网安全就行。找了下如何内网变为 http 访问，蛮麻烦的要自己转发什么的，不再弄了，因为都是在内网里且最终都是提示不安全的。</p>
+<h2 id="显性域名跳转"><a href="#显性域名跳转" class="headerlink" title="显性域名跳转"></a>显性域名跳转</h2><p>因为现在外网是 https 加密连接，所以之前的隐性url跳转不行，变成显性 unmasked 就OK了。</p>
+<img src="/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/b2p27.jpg" style="zoom: 33%;">
+
+
+
+<h1 id="更改ssh的密钥"><a href="#更改ssh的密钥" class="headerlink" title="更改ssh的密钥"></a>更改ssh的密钥</h1><h2 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h2><p>制作安装包安装树莓派hassOS系统的时候，完全按照网易上的那个教程来的，现在公网访问，问题就是那个ssh连接加密的rsa密钥不是自己创建的唯一的，而是大家都知道的，所以现在换成自己的才安全。</p>
+<h2 id="生成和替换自己的-rsa-key"><a href="#生成和替换自己的-rsa-key" class="headerlink" title="生成和替换自己的 rsa key"></a>生成和替换自己的 rsa key</h2><p>用puTTYgen 生成 rsa密钥对，把公有的密钥复制出来，打开 authorized_keys  文件 替换里面的密钥</p>
+<p>root 登录ssh， 然后输入 login 进入底层</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">login    	&#x2F;&#x2F;登录后台</span><br><span class="line">ls -a    	&#x2F;&#x2F;列出当前所有文件包括隐藏文件</span><br><span class="line">pwd      	&#x2F;&#x2F;打印当前工作目录</span><br><span class="line">cd ~&#x2F;.ssh   &#x2F;&#x2F;进入root&#x2F;.ssh文件夹</span><br></pre></td></tr></table></figure>
+
+<p>此时输入 ls 会有 authorized_keys，因为 authorized_keys文件在.ssh文件夹内</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi authorized_keys</span><br></pre></td></tr></table></figure>
+
+<p>进入 全部删除然后 输入  ssh-rsa xxx</p>
+<p>xxx就是自己生成的rsa公钥的内容</p>
+<p>保存，然后ssh的密钥就只有自己知道了。用外网访问就安全了。</p>
 
     </div>
 
@@ -351,7 +402,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://hemingfei.cn/2020/10/25/%E5%87%86%E5%A4%87%E5%BC%80%E5%A7%8B%E5%BC%84%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/" title="准备开始弄智能家居">https://hemingfei.cn/2020/10/25/准备开始弄智能家居/</a>
+    <a href="https://hemingfei.cn/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/" title="安装HomeAssistant">https://hemingfei.cn/2020/11/02/安装HomeAssistant/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
@@ -366,7 +417,10 @@
               <a href="/tags/%E6%99%BA%E8%83%BD%E7%94%B5%E5%99%A8/" rel="tag"><i class="fa fa-tag"></i> 智能电器</a>
               <a href="/tags/HomeAssistant/" rel="tag"><i class="fa fa-tag"></i> HomeAssistant</a>
               <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag"><i class="fa fa-tag"></i> 树莓派</a>
-              <a href="/tags/%E8%B4%AD%E7%89%A9/" rel="tag"><i class="fa fa-tag"></i> 购物</a>
+              <a href="/tags/HassOS/" rel="tag"><i class="fa fa-tag"></i> HassOS</a>
+              <a href="/tags/DuckDNS/" rel="tag"><i class="fa fa-tag"></i> DuckDNS</a>
+              <a href="/tags/%E5%85%AC%E7%BD%91%E8%AE%BF%E9%97%AE/" rel="tag"><i class="fa fa-tag"></i> 公网访问</a>
+              <a href="/tags/https/" rel="tag"><i class="fa fa-tag"></i> https</a>
           </div>
 
         
@@ -374,11 +428,11 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2020/11/02/%E5%AE%89%E8%A3%85HomeAssistant/" rel="next" title="安装HomeAssistant">
-      安装HomeAssistant <i class="fa fa-chevron-right"></i>
+    <a href="/2020/10/25/%E5%87%86%E5%A4%87%E5%BC%80%E5%A7%8B%E5%BC%84%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/" rel="prev" title="准备开始弄智能家居">
+      <i class="fa fa-chevron-left"></i> 准备开始弄智能家居
     </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer><div class="post-widgets">
       <div id="needsharebutton-postbottom">
@@ -444,7 +498,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%83%B3%E6%B3%95%E7%9A%84%E7%94%B1%E6%9D%A5"><span class="nav-number">1.</span> <span class="nav-text">想法的由来</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%88%E5%87%BA%E7%AC%AC%E4%B8%80%E6%AD%A5"><span class="nav-number">3.</span> <span class="nav-text">迈出第一步</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8E%E8%AE%B0"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">树莓派安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%8E%E5%9D%B7"><span class="nav-number">1.1.</span> <span class="nav-text">坎坷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E9%99%A4%E5%B9%BF%E5%91%8A"><span class="nav-number">1.3.</span> <span class="nav-text">移除广告</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE"><span class="nav-number">2.</span> <span class="nav-text">外网访问</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IP-%E4%B8%8E-MAC%E7%BB%91%E5%AE%9A"><span class="nav-number">2.1.</span> <span class="nav-text">IP 与 MAC绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%90%AFDDNS"><span class="nav-number">2.2.</span> <span class="nav-text">开启DDNS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%A0%E5%B0%84%E7%AB%AF%E5%8F%A3"><span class="nav-number">2.3.</span> <span class="nav-text">映射端口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%90%E6%80%A7%E5%9F%9F%E5%90%8D%E8%B7%B3%E8%BD%AC"><span class="nav-number">2.4.</span> <span class="nav-text">隐性域名跳转</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-https-%E5%8A%A0%E5%AF%86%E8%BF%9E%E6%8E%A5"><span class="nav-number">3.</span> <span class="nav-text">通过 https 加密连接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Duck-DNS-%E9%85%8D%E7%BD%AE"><span class="nav-number">3.1.</span> <span class="nav-text">Duck DNS 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configuration-yaml-%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">Configuration.yaml 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%BE%E6%80%A7%E5%9F%9F%E5%90%8D%E8%B7%B3%E8%BD%AC"><span class="nav-number">3.3.</span> <span class="nav-text">显性域名跳转</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9B%B4%E6%94%B9ssh%E7%9A%84%E5%AF%86%E9%92%A5"><span class="nav-number">4.</span> <span class="nav-text">更改ssh的密钥</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">4.1.</span> <span class="nav-text">存在的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%92%8C%E6%9B%BF%E6%8D%A2%E8%87%AA%E5%B7%B1%E7%9A%84-rsa-key"><span class="nav-number">4.2.</span> <span class="nav-text">生成和替换自己的 rsa key</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
